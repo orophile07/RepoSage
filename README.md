@@ -19,7 +19,7 @@ RepoSage is an AI-powered tool designed to analyze GitHub repositories intellige
 
 ## 🛠️ Backend Flow
 
-![Backend Flow Diagram](images/backend_flow.png)
+![Backend Flow Diagram]([images/backend_flow.png](https://github.com/orophile07/RepoSage/blob/efc9d2f5042c9da15df6785be9931377250af73e/images/backend_flow.png))
 
 ## 💡 Features
 
@@ -78,7 +78,7 @@ streamlit run app.py
 
 ---
 
-![App cover picture](images/cover pic.png)
+![App cover picture]([images/cover pic.png](https://github.com/orophile07/RepoSage/blob/efc9d2f5042c9da15df6785be9931377250af73e/images/cover%20pic.png))
 
 ---
 
