@@ -19,7 +19,7 @@ RepoSage is an AI-powered tool designed to analyze GitHub repositories intellige
 
 ## 🛠️ Backend Flow
 
-![Backend Flow Diagram](images/backendflow.png)
+![Backend Flow Diagram](images/backend_flow.png)
 
 ## 💡 Features
 
@@ -77,7 +77,9 @@ streamlit run app.py
 - https://github.com/Aiswariyat/GenAI-RAG-Chatbot
 
 ---
+
 ![App cover picture](images/cover pic.png)
+
 ---
 
 ## 📧 Contact
