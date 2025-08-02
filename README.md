@@ -88,6 +88,17 @@ streamlit run app.py
 
 ---
 
+## 🧠 Sample Questions You Can Ask
+
+You can interact with the bot to ask insightful queries about any GitHub repository you upload or link. Some example prompts:
+
+### 🔍 General Code Understanding
+- "What does this repository do?"
+- "Summarize the purpose of the repo."
+- "List all the files in the project and their roles."
+
+---
+
 ## 📧 Contact
 
 For academic collaboration or questions, feel free to raise an issue or connect via Linkdin!
