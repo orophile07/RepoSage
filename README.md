@@ -73,13 +73,6 @@ streamlit run app.py
 
 ---
 
-## 📂 Example Repositories to Try
-
-- https://github.com/orophile07/AI-Career-Advisor
-- https://github.com/Aiswariyat/GenAI-RAG-Chatbot
-
----
-
 ## 🚀 RepoSage Application Cover Picture
 
 <p align="center">
