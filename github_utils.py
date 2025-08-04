@@ -1,5 +1,18 @@
 import requests
 from urllib.parse import urlparse
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+# Fetch GitHub token from Streamlit secrets (if available)
+try:
+    import streamlit as st
+    GITHUB_TOKEN = st.secrets.get("GITHUB_TOKEN", os.getenv("GITHUB_TOKEN"))
+except Exception:
+    GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
+
+HEADERS = {"Authorization": f"token {GITHUB_TOKEN}"} if GITHUB_TOKEN else {}
 
 def extract_github_info(github_url):
     """
@@ -18,13 +31,15 @@ def fetch_repo_files(owner, repo):
     api_url = f"https://api.github.com/repos/{owner}/{repo}/contents"
 
     def get_files(url, collected_files=[]):
-        response = requests.get(url)
+        response = requests.get(url, headers=HEADERS)
+        if response.status_code == 403:
+            raise Exception("❌ GitHub API rate limit exceeded. Please set a valid GITHUB_TOKEN in your .env or Streamlit secrets.")
         response.raise_for_status()
         data = response.json()
 
         for item in data:
             if item["type"] == "file":
-                file_res = requests.get(item["download_url"])
+                file_res = requests.get(item["download_url"], headers=HEADERS)
                 file_res.raise_for_status()
                 collected_files.append({
                     "path": item["path"],
@@ -37,6 +52,6 @@ def fetch_repo_files(owner, repo):
     return get_files(api_url)
 
 def download_file(url):
-    res = requests.get(url)
+    res = requests.get(url, headers=HEADERS)
     res.raise_for_status()
     return res.text
