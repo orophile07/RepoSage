@@ -29,7 +29,7 @@ st.markdown("""
 <style>
 .open-sidebar-hint {
     position: fixed;
-    top: 65px;
+    top: 60px;
     left: 20px;
     z-index: 10001;
     background: #232323ee;
@@ -57,7 +57,7 @@ function clickSidebarBtn() {
 </script>
 
 <div class="open-sidebar-hint" onclick="clickSidebarBtn()">
-    👉 Tap to open sidebar
+    👆🏻 Tap to open sidebar
 </div>
 """, unsafe_allow_html=True)
 
