@@ -29,7 +29,7 @@ st.markdown("""
 <style>
 .open-sidebar-hint {
     position: fixed;
-    top: 22px;
+    top: 35px;
     left: 66px;
     z-index: 10001;
     background: #232323ee;
