@@ -12,6 +12,69 @@ from dotenv import load_dotenv
 # --- FLOATING SIDEBAR BUTTON ---
 st.set_page_config(page_title="RepoSage", layout="wide")
 
+st.markdown("""
+<style>
+.floating-sidebar-btn {
+    position: fixed;
+    top: 18px;
+    left: 18px;
+    z-index: 9999;
+    background: #2563eb;
+    color: white;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.floating-sidebar-btn:hover {
+    background: #1749a8;
+}
+/* Hide button on large screens (>= 768px) */
+@media (min-width: 768px) {
+  .floating-sidebar-btn { display: none !important; }
+}
+
+.open-sidebar-hint {
+    position: fixed;
+    top: 70px;
+    left: 24px;
+    z-index: 10001;
+    background: #222233ee;
+    color: #fafafa;
+    padding: 8px 14px;
+    border-radius: 18px;
+    font-size: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.17);
+    transition: opacity .4s;
+    cursor: pointer;
+}
+@media (min-width: 768px) {
+  .open-sidebar-hint { display: none; }
+}
+</style>
+
+<script>
+function clickSidebarBtn() {
+    var sideBtn = window.parent.document.querySelector('[data-testid="collapsedControl"]');
+    if (sideBtn){ sideBtn.click(); }
+}
+</script>
+
+<div class="floating-sidebar-btn" onclick="clickSidebarBtn()">
+    ☰
+</div>
+
+<div class="open-sidebar-hint" onclick="clickSidebarBtn()">
+    👉 Tap to open the sidebar
+</div>
+""", unsafe_allow_html=True)
+
 # Insert floating sidebar button at top
 st.markdown("""
 <style>
