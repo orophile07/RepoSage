@@ -25,7 +25,6 @@ except FileNotFoundError:
 # Page config
 st.set_page_config(page_title="RepoSage", layout="wide")
 
-# --- Floating Sidebar Toggle Button & Clickable Label ---
 st.markdown("""
 <style>
 .floating-sidebar-btn {
@@ -60,13 +59,21 @@ st.markdown("""
     left: 24px;
     z-index: 10001;
     background: #222233ee;
-    color: #fafafa;
-    padding: 8px 14px;
-    border-radius: 18px;
-    font-size: 16px;
+    color: #fffbe7;
+    padding: 10px 20px 10px 20px;
+    border-radius: 22px;
+    font-size: 18px;
+    font-weight: 600;
     box-shadow: 0 2px 8px rgba(0,0,0,0.17);
     transition: opacity .4s;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 2px solid #ffc107;
+}
+.open-sidebar-hint:active {
+    background: #353559ee;
 }
 @media (min-width: 768px) {
   .open-sidebar-hint { display: none; }
@@ -85,7 +92,7 @@ function clickSidebarBtn() {
 </div>
 
 <div class="open-sidebar-hint" onclick="clickSidebarBtn()">
-    👉 Tap to open the sidebar
+    <span>🪄</span> <span>Tap here to open the sidebar</span>
 </div>
 """, unsafe_allow_html=True)
 
