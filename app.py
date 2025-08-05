@@ -25,6 +25,42 @@ except FileNotFoundError:
 # Page config
 st.set_page_config(page_title="RepoSage", layout="wide")
 
+st.markdown("""
+<style>
+.open-sidebar-hint {
+    position: fixed;
+    top: 22px;
+    left: 66px;
+    z-index: 10001;
+    background: #232323ee;
+    color: #fffbe7;
+    padding: 7px 16px 7px 16px;
+    border-radius: 15px;
+    font-size: 15px;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.13);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 2px solid #ffc107;
+}
+@media (min-width: 768px) {
+  .open-sidebar-hint { display: none; }
+}
+</style>
+<script>
+function clickSidebarBtn() {
+    var sideBtn = window.parent.document.querySelector('[data-testid="collapsedControl"]');
+    if (sideBtn){ sideBtn.click(); }
+}
+</script>
+
+<div class="open-sidebar-hint" onclick="clickSidebarBtn()">
+    👉 Tap to open sidebar
+</div>
+""", unsafe_allow_html=True)
+
 # Custom CSS styles
 st.markdown(f"""
     <style>
