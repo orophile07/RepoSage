@@ -29,8 +29,8 @@ st.markdown("""
 <style>
 .open-sidebar-hint {
     position: fixed;
-    top: 35px;
-    left: 66px;
+    top: 50px;
+    left: 50px;
     z-index: 10001;
     background: #232323ee;
     color: #fffbe7;
