@@ -9,9 +9,23 @@ from qa_utils import ask_question
 from qa_chain import get_direct_llm
 from dotenv import load_dotenv
 
-# --- FLOATING SIDEBAR BUTTON ---
+# Fetch Groq API key from streamlit secrets
+if not st.secrets["GROQ_API_KEY"]:
+    st.error("Error: groq_api_key not found in environment variables. Please set it in your .env file.")
+    st.stop()
+
+# Load GitHub icon
+try:
+    with open("icon-github.png", "rb") as img_file:
+        github_icon_base64 = base64.b64encode(img_file.read()).decode()
+except FileNotFoundError:
+    github_icon_base64 = ""
+    st.error("Error: icon-github.png not found. Please ensure it's in the same directory.")
+
+# Page config
 st.set_page_config(page_title="RepoSage", layout="wide")
 
+# --- Floating Sidebar Toggle Button & Clickable Label ---
 st.markdown("""
 <style>
 .floating-sidebar-btn {
@@ -75,60 +89,6 @@ function clickSidebarBtn() {
 </div>
 """, unsafe_allow_html=True)
 
-# Insert floating sidebar button at top
-st.markdown("""
-<style>
-.floating-sidebar-btn {
-    position: fixed;
-    top: 18px;
-    left: 18px;
-    z-index: 9999;
-    background: #2563eb;
-    color: white;
-    border-radius: 50%;
-    width: 48px;
-    height: 48px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 28px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    cursor: pointer;
-    transition: background 0.2s;
-}
-.floating-sidebar-btn:hover {
-    background: #1749a8;
-}
-/* Hide button on large screens (>= 768px) */
-@media (min-width: 768px) {
-  .floating-sidebar-btn { display: none !important; }
-}
-</style>
-<script>
-function clickSidebarBtn() {
-    var sideBtn = window.parent.document.querySelector('[data-testid="collapsedControl"]');
-    if (sideBtn){ sideBtn.click(); }
-}
-</script>
-<div class="floating-sidebar-btn" onclick="clickSidebarBtn()">
-    ☰
-</div>
-""", unsafe_allow_html=True)
-
-# --- YOUR EXISTING CODE CONTINUES HERE ---
-
-if not st.secrets["GROQ_API_KEY"]:
-    st.error("Error: groq_api_key not found in environment variables. Please set it in your .env file.")
-    st.stop()
-
-# Load GitHub icon
-try:
-    with open("icon-github.png", "rb") as img_file:
-        github_icon_base64 = base64.b64encode(img_file.read()).decode()
-except FileNotFoundError:
-    github_icon_base64 = ""
-    st.error("Error: icon-github.png not found. Please ensure it's in the same directory.")
-
 # Custom CSS styles
 st.markdown(f"""
     <style>
@@ -174,10 +134,11 @@ st.markdown(f"""
     </style>
 """, unsafe_allow_html=True)
 
-# --- NORMAL STREAMLIT SIDEBAR AND MAIN LOGIC (NO CHANGES NEEDED) ---
+# Initialize session state
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = []
 
+# Sidebar UI
 with st.sidebar:
     if github_icon_base64:
         st.markdown(f"""
@@ -188,6 +149,7 @@ with st.sidebar:
         """, unsafe_allow_html=True)
 
     st.markdown("## 🔗 Upload GitHub Repo Link")
+
     with st.form(key="repo_form"):
         st.markdown("Paste GitHub URL")
         github_url = st.text_input("", label_visibility="collapsed", key="github_url_input")
@@ -224,9 +186,13 @@ with st.sidebar:
             except Exception as e:
                 st.error(f"❌ Error processing repository: {e}")
                 st.stop()
+    
+    # Clear chat button
     if st.button("🧹 Clear Chat"):
         st.session_state.chat_history = []
         st.success("Chat history cleared!")
+
+    # 📌 Academic disclaimer at the bottom
     if "academic_note_rendered" not in st.session_state:
         st.session_state.academic_note_rendered = True
         st.markdown("""
